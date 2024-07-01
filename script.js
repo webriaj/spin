@@ -10,11 +10,10 @@ var padding = {top:20, right:40, bottom:0, left:0},
             //randomNumbers = getRandomNumbers();
         //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
         var data = [
-                    {"label":"Iftekhar",  "value":1,  "question":"Congratulation Iftekhar. You won the toss"}, // padding
-                    {"label":"Asad",  "value":2,  "question":"Congratulation Asaduzzaman. You won the toss"}, //font-family
-                    {"label":"Mahin",  "value":3,  "question":"Congratulation Mahin. You won the toss"}, //color
-                    {"label":"Riaj",  "value":4,  "question":"Congratulation Riaj. You won the toss"}, //font-weight
-
+            {"label":"Iftekhar",  "value":1,  "question":"Congratulation Iftekhar. You won the toss", "bankDetails":{ "Acc Name": "Md Iftekhairul Islam","Acc No":"1311260001320","Bank Name":"Eastern Bank Ltd","Branch":"Mawna"}},
+            {"label":"Asad",  "value":2,  "question":"Congratulation Asaduzzaman. You won the toss", "bankDetails":{ "Acc Name": "Md Asaduzzaman","Acc No":"000","Bank Name":"XXX","Branch":"XX"}},
+            {"label":"Mahin",  "value":3,  "question":"Congratulation Mahin. You won the toss", "bankDetails":{ "Acc Name": "Md Taslim Al Manjar","Acc No":"0000","Bank Name":"Eastern Bank Ltd","Branch":"XX"}},
+            {"label":"Riaj",  "value":4,  "question":"Congratulation Riaj. You won the toss", "bankDetails":{ "Acc Name": "Md Riaj Khan","Acc No":"1151050037923","Bank Name":"Dutch Bangla Bank Ltd","Branch":"Mirpur"}}
         ];
         var svg = d3.select('#chart')
             .append("svg")
@@ -88,14 +87,43 @@ var padding = {top:20, right:40, bottom:0, left:0},
                     d3.select("#question h1")
                         .text(data[picked].question);
                     oldrotation = rotation;
-              
+                    // Populate question with formatted bank details
+                    var bankDetails = data[picked].bankDetails;
+                    var detailsHtml = "<strong>Bank Account Details:</strong><br>";
+                    detailsHtml += "Acc Name: " + bankDetails["Acc Name"] + "<br>";
+                    detailsHtml += "Acc No: " + bankDetails["Acc No"] + "<br>";
+                    detailsHtml += "Bank Name: " + bankDetails["Bank Name"] + "<br>";
+                    detailsHtml += "Branch: " + bankDetails["Branch"];
                     /* Get the result value from object "data" */
                     console.log(data[picked].value)
+                    d3.select("#question h1")
+                .html(data[picked].question + '<br><button onclick="showBankDetails(\'' + data[picked].label + '\')">Show Bank Details</button>');
               
                     /* Comment the below line for restrict spin to sngle time */
                     container.on("click", spin);
                 });
         }
+        function showBankDetails(winnerName) {
+            var winner = data.find(function(item) {
+                return item.label === winnerName;
+            });
+        
+            if (winner) {
+                var bankDetails = winner.bankDetails || {};
+                var detailsHtml = "<strong>Bank Account Details:</strong><br>";
+                detailsHtml += "Acc Name: " + bankDetails["Acc Name"] + "<br>";
+                detailsHtml += "Acc No: " + bankDetails["Acc No"] + "<br>";
+                detailsHtml += "Bank Name: " + bankDetails["Bank Name"] + "<br>";
+                detailsHtml += "Branch: " + bankDetails["Branch"];
+        
+                // Update HTML to show bank details
+                document.getElementById("accountDetails").innerHTML = detailsHtml;
+        
+                // Display bank details section
+                document.getElementById("bankDetails").style.display = "block";
+            }
+        }
+        
         //make arrow
         svg.append("g")
             .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
@@ -138,4 +166,8 @@ var padding = {top:20, right:40, bottom:0, left:0},
                 }
             }
             return array;
+        }
+        function hideDiv() {
+            var div = document.getElementById("bankDetails");
+            div.style.display = "none";
         }
