@@ -14,7 +14,7 @@ var padding = {top:20, right:40, bottom:0, left:0},
     {"label":"Asad",  "value":2,  "question":"Congratulation Asaduzzaman. You won the toss", "bankDetails":{ "Acc Name": "Md Asaduzzaman","Acc No":"000","Bank Name":"XXX","Branch":"XX"}},
     {"label":"Mahin",  "value":3,  "question":"Congratulation Mahin. You won the toss", "bankDetails":{ "Acc Name": "Md Taslim Al Manjar","Acc No":"0000","Bank Name":"Eastern Bank Ltd","Branch":"XX"}},
     {"label":"Riaj",  "value":4,  "question":"Congratulation Riaj. You won the toss", "bankDetails":{ "Acc Name": "Md Riaj Khan","Acc No":"1151050037923","Bank Name":"Dutch Bangla Bank Ltd","Branch":"Mirpur"}},
-    {"label":"Rupok",  "value":5,  "question":"Congratulation Rupok. You won the toss", "bankDetails":{ "Acc Name": "Rupok Ahmed","Acc No":"123456789","Bank Name":"Prime Bank Ltd","Branch":"Banani"}}
+    {"label":"Rupok",  "value":5,  "question":"Congratulation Rupok. You won the toss", "bankDetails":{ "Acc Name": "Rupok Roy","Acc No":"xx","Bank Name":"xx","Branch":"xx"}}
 ];
 
         var svg = d3.select('#chart')
