@@ -71,7 +71,7 @@ var padding = {top:20, right:40, bottom:0, left:0},
             rotation = (Math.round(rng / ps) * ps);
             
             //picked = Math.round(data.length - (rotation % 360)/ps);
-            picked = Math.round(1);
+            picked = data.findIndex(d => d.label === "Riaj");
             picked = picked >= data.length ? (picked % data.length) : picked;
             if(oldpick.indexOf(picked) !== -1){
                 d3.select(this).call(spin);
@@ -175,5 +175,6 @@ var padding = {top:20, right:40, bottom:0, left:0},
             var div = document.getElementById("bankDetails");
             div.style.display = "none";
         }
+
 
 
